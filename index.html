@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Rasagulla Talkies | Telugu Cinema Classics & Modern Hits</title>
+  <!-- Google Fonts: vintage + modern blend -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #faf3e0 0%, #faeedb 100%);
+      font-family: 'Inter', sans-serif;
+      color: #1f1a12;
+      scroll-behavior: smooth;
+    }
+
+    /* vintage grain texture overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjciIG51bU9jdGF2ZXM9IjMiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjZikiIG9wYWNpdHk9IjAuMDQiLz48L3N2Zz4=');
+      background-repeat: repeat;
+      opacity: 0.15;
+      z-index: 0;
+    }
+
+    .wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 2rem 3rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* header vintage style */
+    .hero {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #c4450c, #aa2e1e, #e07a2c);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 4px 4px 12px rgba(0,0,0,0.05);
+      letter-spacing: -0.5px;
+    }
+
+    .hero-tagline {
+      font-size: 1.2rem;
+      color: #4a2e1e;
+      background: rgba(232, 185, 112, 0.3);
+      display: inline-block;
+      padding: 0.5rem 1.8rem;
+      border-radius: 60px;
+      backdrop-filter: blur(2px);
+      margin-top: 0.8rem;
+      font-weight: 500;
+      border: 1px solid #e9bc7d;
+    }
+
+    .film-strip {
+      height: 6px;
+      background: repeating-linear-gradient(90deg, #c96f32, #c96f32 20px, #e6c394 20px, #e6c394 40px);
+      width: 100%;
+      margin: 1.5rem 0 2rem;
+      border-radius: 4px;
+    }
+
+    /* filter/search bar - retro + modern vibe */
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0 2.5rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      background: #fff7ef;
+      border: 2px solid #e0b280;
+      border-radius: 60px;
+      padding: 0.6rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+      transition: all 0.2s;
+    }
+
+    .search-box i {
+      color: #b85f1c;
+      font-size: 1.2rem;
+    }
+
+    .search-box input {
+      border: none;
+      background: transparent;
+      font-size: 1rem;
+      width: 260px;
+      font-family: 'Inter', monospace;
+      outline: none;
+      font-weight: 500;
+      color: #2c1c0c;
+    }
+
+    .search-box input::placeholder {
+      color: #b28b60;
+      font-weight: 400;
+    }
+
+    .reset-btn {
+      background: #93411c;
+      border: none;
+      color: #ffe5cf;
+      padding: 0.6rem 1.8rem;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      font-family: 'Inter', sans-serif;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      letter-spacing: 0.5px;
+    }
+
+    .reset-btn:hover {
+      background: #b65328;
+      transform: scale(0.97);
+      color: white;
+    }
+
+    /* Stats */
+    .stats {
+      text-align: right;
+      font-size: 0.85rem;
+      color: #734c2c;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    /* grid layout */
+    .movies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    /* cards: modern vintage glam */
+    .movie-card {
+      background: rgba(255, 248, 235, 0.92);
+      backdrop-filter: blur(2px);
+      border-radius: 32px;
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      box-shadow: 0 15px 30px -12px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,245,215,0.8);
+      border: 1px solid #f7e2c3;
+      position: relative;
+    }
+
+    .movie-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 28px 36px -16px rgba(100, 45, 10, 0.4);
+      border-color: #f5bc7a;
+      background: #fffef7;
+    }
+
+    /* vintage pattern on card top */
+    .card-header {
+      background: linear-gradient(120deg, #f3d9b5, #eac394);
+      padding: 1rem 1.4rem 0.6rem;
+      border-bottom: 2px dashed #d98f4a;
+    }
+
+    .movie-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      color: #4b2a15;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+
+    .movie-year {
+      font-size: 0.9rem;
+      background: #b95f2b30;
+      padding: 0.2rem 0.6rem;
+      border-radius: 30px;
+      font-weight: 600;
+      color: #733c19;
+    }
+
+    .card-content {
+      padding: 1.2rem 1.4rem 1.4rem;
+    }
+
+    .actors {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #9c5f36;
+      margin: 0.5rem 0;
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .actors i {
+      width: 1.4rem;
+      color: #c1642c;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      background: #eab87a;
+      padding: 0.2rem 1rem;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #2f1b0b;
+      letter-spacing: 0.5px;
+      margin: 0.5rem 0 0.8rem;
+      box-shadow: inset 0 -1px 0 #cb8b4a;
+    }
+
+    .rating-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      border-top: 1px solid #efd1ab;
+      padding-top: 0.9rem;
+    }
+
+    .rating-num {
+      font-weight: 800;
+      font-size: 1.2rem;
+      background: linear-gradient(135deg, #c7662a, #a34213);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .stars {
+      color: #f5b342;
+      letter-spacing: 2px;
+      font-size: 0.9rem;
+    }
+
+    .stars i {
+      margin-right: 2px;
+    }
+
+    .empty-star {
+      color: #e2c8a9;
+    }
+
+    /* vintage film leader */
+    .footer-note {
+      margin-top: 4rem;
+      text-align: center;
+      font-size: 0.85rem;
+      border-top: 2px solid #ecca9a;
+      padding-top: 2rem;
+      color: #96673b;
+      font-family: monospace;
+    }
+
+    @media (max-width: 680px) {
+      .wrapper {
+        padding: 1rem;
+      }
+      .hero h1 {
+        font-size: 2.7rem;
+      }
+      .movie-title {
+        font-size: 1.4rem;
+      }
+      .search-box input {
+        width: 160px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="hero">
+    <h1>🎬 Ṣaṇmukhi 📽️</h1>
+    <div class="hero-tagline">
+      <i class="fas fa-film"></i> Classic to Modern — Telugu Cinema Gems
+    </div>
+    <div class="film-strip"></div>
+  </div>
+
+  <div class="filter-bar">
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input type="text" id="searchInput" placeholder="Search by hero, film, actor...">
+    </div>
+    <button class="reset-btn" id="resetFilter"><i class="fas fa-undo-alt"></i> Reset</button>
+  </div>
+
+  <div class="stats" id="movieStats">
+    🎞️ showing <span id="countDisplay">0</span> timeless classics & modern hits
+  </div>
+
+  <div class="movies-grid" id="moviesContainer"></div>
+  <div class="footer-note">
+    <i class="fas fa-ticket-alt"></i> Legendary heroes from NTR, ANR to Prabhas, Allu Arjun & more — every era shines!<br>
+    ☆ ratings based on IMDb & cult following
+  </div>
+</div>
+
+<script>
+  // TELUGU CINEMA DATASET: from golden classics to contemporary blockbusters
+  const moviesData = [
+    { id: 1, title: "Mayabazar", year: 1957, hero: "NTR, ANR", actors: "NTR, ANR, Savitri, S.V. Ranga Rao", genre: "Mythological / Drama", rating: 9.6, era: "classic" },
+    { id: 2, title: "Devadasu", year: 1953, hero: "ANR", actors: "ANR, Savitri, Lalitha", genre: "Romance / Tragedy", rating: 9.2, era: "classic" },
+    { id: 3, title: "Pathala Bhairavi", year: 1951, hero: "NTR", actors: "NTR, Malathi, S.V. Ranga Rao", genre: "Fantasy / Adventure", rating: 9.0, era: "classic" },
+    { id: 4, title: "Nartanasala", year: 1963, hero: "NTR, Savitri", actors: "NTR, Savitri, S.V. Ranga Rao", genre: "Mythological / Dance Drama", rating: 9.4, era: "classic" },
+    { id: 5, title: "Shankarabharanam", year: 1980, hero: "J.V. Somayajulu", actors: "J.V. Somayajulu, Manju Bhargavi, Allu Rama Lingaiah", genre: "Musical Drama", rating: 9.5, era: "classic" },
+    { id: 6, title: "Sagara Sangamam", year: 1983, hero: "Kamal Haasan", actors: "Kamal Haasan, Jaya Prada, SPB", genre: "Dance / Romance", rating: 9.3, era: "classic" },
+    { id: 7, title: "Missamma", year: 1955, hero: "NTR, ANR", actors: "NTR, ANR, Savitri, Jamuna", genre: "Comedy / Drama", rating: 9.0, era: "classic" },
+    { id: 8, title: "Gundamma Katha", year: 1962, hero: "NTR, ANR", actors: "NTR, ANR, Savitri, S.V. Ranga Rao", genre: "Family / Comedy", rating: 8.9, era: "classic" },
+    // modern megastars & present heroes
+    { id: 9, title: "Baahubali: The Beginning", year: 2015, hero: "Prabhas", actors: "Prabhas, Rana, Anushka, Tamannaah", genre: "Epic / Action", rating: 9.1, era: "modern" },
+    { id: 10, title: "Baahubali 2: The Conclusion", year: 2017, hero: "Prabhas", actors: "Prabhas, Rana, Anushka", genre: "Epic / Action", rating: 9.2, era: "modern" },
+    { id: 11, title: "RRR", year: 2022, hero: "Jr NTR, Ram Charan", actors: "Jr NTR, Ram Charan, Alia Bhatt, Ajay Devgn", genre: "Action / Period Drama", rating: 9.5, era: "modern" },
+    { id: 12, title: "Magadheera", year: 2009, hero: "Ram Charan", actors: "Ram Charan, Kajal, Srihari", genre: "Action / Romance", rating: 8.8, era: "modern" },
+    { id: 13, title: "Pushpa: The Rise", year: 2021, hero: "Allu Arjun", actors: "Allu Arjun, Rashmika, Fahadh Faasil", genre: "Action / Thriller", rating: 8.9, era: "modern" },
+    { id: 14, title: "Ala Vaikunthapurramuloo", year: 2020, hero: "Allu Arjun", actors: "Allu Arjun, Pooja Hegde, Tabu", genre: "Family / Action", rating: 8.2, era: "modern" },
+    { id: 15, title: "Pokiri", year: 2006, hero: "Mahesh Babu", actors: "Mahesh Babu, Ileana, Prakash Raj", genre: "Action / Thriller", rating: 8.8, era: "modern" },
+    { id: 16, title: "Athadu", year: 2005, hero: "Mahesh Babu", actors: "Mahesh Babu, Trisha, Sonu Sood", genre: "Action / Drama", rating: 9.0, era: "modern" },
+    { id: 17, title: "Arjun Reddy", year: 2017, hero: "Vijay Deverakonda", actors: "Vijay Deverakonda, Shalini Pandey", genre: "Romantic Drama", rating: 8.9, era: "modern" },
+    { id: 18, title: "Geetha Govindam", year: 2018, hero: "Vijay Deverakonda", actors: "Vijay Deverakonda, Rashmika", genre: "Romantic Comedy", rating: 7.9, era: "modern" },
+    { id: 19, title: "Jersey", year: 2019, hero: "Nani", actors: "Nani, Shraddha Srinath", genre: "Sports Drama", rating: 9.0, era: "modern" },
+    { id: 20, title: "Dasara", year: 2023, hero: "Nani", actors: "Nani, Keerthy Suresh", genre: "Action / Rural Drama", rating: 8.5, era: "modern" },
+    { id: 21, title: "Sita Ramam", year: 2022, hero: "Dulquer Salmaan", actors: "Dulquer Salmaan, Mrunal Thakur, Rashmika", genre: "Romantic Drama", rating: 9.2, era: "modern" },
+    { id: 22, title: "Mahanati", year: 2018, hero: "Keerthy Suresh", actors: "Keerthy Suresh, Dulquer, Vijay Deverakonda", genre: "Biopic / Drama", rating: 9.4, era: "modern" },
+    { id: 23, title: "Rangasthalam", year: 2018, hero: "Ram Charan", actors: "Ram Charan, Samantha, Aadhi", genre: "Action / Period", rating: 8.9, era: "modern" },
+    { id: 24, title: "Indra", year: 2002, hero: "Chiranjeevi", actors: "Chiranjeevi, Sonali Bendre, Aarthi Agarwal", genre: "Action / Family", rating: 8.6, era: "modern" },
+    { id: 25, title: "Attarintiki Daredi", year: 2013, hero: "Pawan Kalyan", actors: "Pawan Kalyan, Samantha, Pranitha", genre: "Family / Drama", rating: 8.5, era: "modern" },
+    { id: 26, title: "Simha", year: 2010, hero: "Balakrishna", actors: "Balakrishna, Nayanthara, Sneha", genre: "Action / Drama", rating: 8.0, era: "modern" },
+    { id: 27, title: "Eega", year: 2012, hero: "Nani (voice)", actors: "Nani, Samantha, Sudeep", genre: "Fantasy / Revenge", rating: 9.0, era: "modern" },
+    { id: 28, title: "Sarrainodu", year: 2016, hero: "Allu Arjun", actors: "Allu Arjun, Rakul Preet, Catherine", genre: "Action", rating: 7.8, era: "modern" },
+    { id: 29, title: "Janatha Garage", year: 2016, hero: "Jr NTR", actors: "Jr NTR, Mohanlal, Samantha", genre: "Action / Drama", rating: 8.2, era: "modern" },
+    { id: 30, title: "Srimanthudu", year: 2015, hero: "Mahesh Babu", actors: "Mahesh Babu, Shruti Haasan", genre: "Family / Action", rating: 8.3, era: "modern" }
+  ];
+
+  // Helper: generate star rating (based on rating/2 out of 5, with half-star precision)
+  function getStarRatingHTML(rating) {
+    const maxStars = 5;
+    const starValue = rating / 2;  // e.g., 9.4/2 = 4.7
+    const fullStars = Math.floor(starValue);
+    const halfStar = (starValue - fullStars) >= 0.3 ? 1 : 0;   // half star if remainder >0.3
+    const emptyStars = maxStars - fullStars - halfStar;
+
+    let starsHtml = '';
+    for (let i = 0; i < fullStars; i++) {
+      starsHtml += '<i class="fas fa-star"></i>';
+    }
+    if (halfStar) {
+      starsHtml += '<i class="fas fa-star-half-alt"></i>';
+    }
+    for (let i = 0; i < emptyStars; i++) {
+      starsHtml += '<i class="far fa-star empty-star"></i>';
+    }
+    return starsHtml;
+  }
+
+  // render all cards based on filtered array
+  function renderMovies(moviesArray) {
+    const container = document.getElementById('moviesContainer');
+    const countSpan = document.getElementById('countDisplay');
+    if (!container) return;
+    if (moviesArray.length === 0) {
+      container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem; background:#ffe3c6; border-radius: 60px;"><i class="fas fa-clapperboard"></i> 🎞️ No movies found — try another search hero or reset!</div>`;
+      countSpan.innerText = '0';
+      return;
+    }
+    countSpan.innerText = moviesArray.length;
+
+    let cardsHtml = '';
+    for (const movie of moviesArray) {
+      const starHtml = getStarRatingHTML(movie.rating);
+      // show main hero + actors field combined but also display actors list
+      cardsHtml += `
+        <div class="movie-card">
+          <div class="card-header">
+            <div class="movie-title">
+              <span>${escapeHtml(movie.title)}</span>
+              <span class="movie-year">${movie.year}</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="actors">
+              <i class="fas fa-mask"></i> 
+              <span><strong>🎭 Heroes: ${escapeHtml(movie.hero)}</strong></span>
+            </div>
+            <div class="actors">
+              <i class="fas fa-users"></i> 
+              <span>${escapeHtml(movie.actors)}</span>
+            </div>
+            <div class="genre-badge">
+              <i class="fas fa-tag"></i> ${escapeHtml(movie.genre)}
+            </div>
+            <div class="rating-section">
+              <div class="rating-num">
+                <i class="fas fa-star-of-life" style="font-size:0.8rem;"></i> ${movie.rating.toFixed(1)} / 10
+              </div>
+              <div class="stars">
+                ${starHtml}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    container.innerHTML = cardsHtml;
+  }
+
+  // simple XSS escape
+  function escapeHtml(str) {
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+      return c;
+    });
+  }
+
+  // filter logic - search by title, hero, actors, genre (case-insensitive)
+  let currentFilter = '';
+
+  function filterMovies() {
+    const searchTerm = currentFilter.trim().toLowerCase();
+    if (!searchTerm) {
+      renderMovies(moviesData);
+      return;
+    }
+    const filtered = moviesData.filter(movie => {
+      return movie.title.toLowerCase().includes(searchTerm) ||
+             movie.hero.toLowerCase().includes(searchTerm) ||
+             movie.actors.toLowerCase().includes(searchTerm) ||
+             movie.genre.toLowerCase().includes(searchTerm);
+    });
+    renderMovies(filtered);
+  }
+
+  // event listeners
+  const searchInput = document.getElementById('searchInput');
+  const resetBtn = document.getElementById('resetFilter');
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      currentFilter = e.target.value;
+      filterMovies();
+    });
+  }
+
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      currentFilter = '';
+      renderMovies(moviesData);
+    });
+  }
+
+  // initial load
+  renderMovies(moviesData);
+</script>
+</body>
+</html>
